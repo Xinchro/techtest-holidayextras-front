@@ -63,3 +63,6 @@ typings/
 # sass
 .sass-cache/
 *.map
+
+# keys and tokens
+keys.json
