@@ -52,8 +52,6 @@
                 <i class="material-icons right">close</i></span>
               <p>{{item.description}}</p>
               <p>Date taken: {{formatDate(item.date_taken)}}</p>
-              <p v-if="item.published">Published: {{formatDate(item.published)}}</p>
-              <p v-if="!item.published">No publish</p>
             </div>
           </section>
         </li>
