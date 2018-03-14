@@ -30,7 +30,30 @@ let app = new Vue({
         "July", "August", "September", "October", "November", "December"
       ]
 
-      return `${date.getFullYear()}, ${MONTH_NAMES[date.getMonth()]}, ${date.getDate()} at ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+      let dateString = ""
+
+      dateString = dateString.concat(date.getFullYear())
+
+      dateString = dateString.concat(", ")
+      dateString = dateString.concat(MONTH_NAMES[date.getMonth()])
+
+      dateString = dateString.concat(", ")
+      dateString = dateString.concat(this.padTens(date.getDate()))
+
+      dateString = dateString.concat(" at ")
+      dateString = dateString.concat(this.padTens(date.getHours()))
+
+      dateString = dateString.concat(":")
+      dateString = dateString.concat(this.padTens(date.getMinutes()))
+
+      dateString = dateString.concat(":")
+      dateString = dateString.concat(this.padTens(date.getSeconds()))
+
+      return dateString
+    },
+
+    padTens(number) {
+      return number > 10 ? number : `0${number}`
     },
 
     titleExists(title) {
