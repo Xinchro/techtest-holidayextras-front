@@ -50,7 +50,7 @@
               <span class="card-title grey-text text-darken-4">
                 <a :href="item.link" v-bind:title=titleExists(item.title)>{{titleExists(item.title)}}</a>
                 <i class="material-icons right">close</i></span>
-              <p>{{item.description}}</p>
+              <p>{{getDescription(item.description)}}</p>
               <p>Date taken: {{formatDate(item.date_taken)}}</p>
             </div>
           </section>

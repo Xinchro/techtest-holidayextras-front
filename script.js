@@ -52,6 +52,18 @@ let app = new Vue({
       return dateString
     },
 
+    getDescription(descriptionString) {
+      let template = document.createElement("div")
+
+      template.innerHTML = descriptionString
+
+      if(template.children[2]) {
+        return template.children[2].innerText
+      }
+
+      return "No description"
+    },
+
     padTens(number) {
       return number > 10 ? number : `0${number}`
     },
