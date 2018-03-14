@@ -1,3 +1,32 @@
-p {
-  font-size: 2rem;
+.card {
+  .card-content, .card-reveal {
+    .card-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        float: left;
+        width: calc(100% - 40px);
+      }
+    }
+  }
+
+  .card-action {
+    .tag-list {
+      overflow: auto;
+
+      .chip {
+        display: inline;
+      }
+    }
+  }
+
+  &.card.sticky-action {
+    .card-reveal{
+      z-index: 3;
+    }
+  }
 }
+

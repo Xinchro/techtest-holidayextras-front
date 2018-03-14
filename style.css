@@ -1,4 +1,17 @@
-p {
-  font-size: 2rem; }
+.card .card-content .card-title, .card .card-reveal .card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+  .card .card-content .card-title a, .card .card-reveal .card-title a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+    width: calc(100% - 40px); }
+.card .card-action .tag-list {
+  overflow: auto; }
+  .card .card-action .tag-list .chip {
+    display: inline; }
+.card.card.sticky-action .card-reveal {
+  z-index: 3; }
 
 /*# sourceMappingURL=style.css.map */
