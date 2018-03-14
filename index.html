@@ -24,7 +24,11 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
     <section id="vue-app">
-      <h1>{{flickrJSON.title}}</h1>
+      <nav>
+        <section class="nav-wrapper">
+          <span class="brand-logo">Flickr - {{flickrJSON.title}}</span>
+        </section>
+      </nav>
       <ul class="row">
         <li v-for="item in flickrJSON.items" class="col s12 m6 l4 xl3">
           <section class="card sticky-action large">
