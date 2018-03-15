@@ -4,6 +4,11 @@ let app = new Vue({
     flickrUrl: "https://api.flickr.com/services/feeds/photos_public.gne?format=json",
     flickrJSON: {}
   },
+  beforeCreate: function () {
+    this.$nextTick(function () {
+      this.start()
+    })
+  },
   methods: {
     start() {
       this.getFlickrJSON()
@@ -84,6 +89,3 @@ let app = new Vue({
     }
   }
 })
-
-// launch app
-app.start()
