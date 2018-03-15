@@ -65,4 +65,4 @@ typings/
 *.map
 
 # keys and tokens
-keys.json
+keys.js
