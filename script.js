@@ -8,3 +8,5 @@ const router = new VueRouter({
 const app = new Vue({
   router
 }).$mount("#vue-app")
+
+window.app = app
