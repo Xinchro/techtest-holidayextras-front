@@ -5,7 +5,8 @@ export default Vue.component("tagsPage", {
   data() {
     return {
       flickrApiUrl: "http://api.flickr.com/services/rest/",
-      flickrJSON: {}
+      flickrJSON: {},
+      search: ""
     }
   },
   beforeCreate: function () {
@@ -15,10 +16,7 @@ export default Vue.component("tagsPage", {
   },
   methods: {
     start() {
-      this.getPhotosByTag("cat")
-        .then((response) => {
-          this.flickrJSON = response
-        })
+      this.getPhotosByTags("cat")
     },
 
     formatTags(tagString) {
@@ -92,28 +90,26 @@ export default Vue.component("tagsPage", {
         })
     },
 
-    getPhotosByTag(tag) {
-      return new Promise((res, rej) => {
-        let photos = []
+    getPhotosByTags(tags) {
+      let photos = []
 
-        const method = "flickr.photos.search"
+      tags = tags.replace(/\ /g, ",")
 
-        const extras = "date_taken,description,owner_name,tags,url_m"
+      const method = "flickr.photos.search"
 
-        const format = "format=json"
+      const extras = "date_taken,description,owner_name,tags,url_m"
 
-        const queries = `method=${method}&api_key=${window.flickrTokens.Key}&tags=${tag}&extras=${extras}`
+      const format = "format=json"
 
-        const request = `${this.flickrApiUrl}?${queries}&${format}`
+      const queries = `method=${method}&api_key=${window.flickrTokens.Key}&tags=${tags}&extras=${extras}`
+
+      const request = `${this.flickrApiUrl}?${queries}&${format}`
 
 
-        this.getFlickrJSON(request, "jsonFlickrApi")
-          .then((response) => {
-            res({
-              items: response.photos.photo
-            })
-          })
-      })
+      this.getFlickrJSON(request, "jsonFlickrApi")
+        .then((response) => {
+          this.flickrJSON = { items: response.photos.photo }
+        })
     }
   }
 })

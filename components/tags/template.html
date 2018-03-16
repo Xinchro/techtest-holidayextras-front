@@ -1,5 +1,11 @@
 <section id="vue-main-page">
   <navbar></navbar>
+  <form v-on:submit.prevent="getPhotosByTags(search)">
+    <section class="input-field">
+      <input id="search" type="search" placeholder="Search" v-model="search">
+      <i class="material-icons">close</i>
+    </section>
+  </form>
   <ul class="row">
     <li v-for="item in flickrJSON.items" class="col s12 m4 l3 xl2">
       <section class="card sticky-action small">
