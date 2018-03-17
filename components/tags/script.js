@@ -9,7 +9,8 @@ export default Vue.component("tagsPage", {
       search: "",
       busy: false,
       displayJSON: { items: [] },
-      lastImageIndex: 0
+      lastImageIndex: 0,
+      currentPage: 1
     }
   },
   beforeCreate: function () {
@@ -19,7 +20,8 @@ export default Vue.component("tagsPage", {
   },
   methods: {
     start() {
-      this.getPhotosByTags("cat")
+      this.search = "cat"
+      this.getPhotosByTags(this.search)
     },
 
     formatTags(tagString) {
@@ -104,20 +106,22 @@ export default Vue.component("tagsPage", {
 
       const format = "format=json"
 
-      const queries = `method=${method}&api_key=${window.flickrTokens.Key}&tags=${tags}&extras=${extras}`
+      const page = `page=${this.currentPage}`
+
+      const queries = `method=${method}&api_key=${window.flickrTokens.Key}&tags=${tags}&extras=${extras}&${page}`
 
       const request = `${this.flickrApiUrl}?${queries}&${format}`
 
 
       this.getFlickrJSON(request, "jsonFlickrApi")
         .then((response) => {
-          this.flickrJSON = { items: response.photos.photo }
-          this.lastImageIndex = 0
+          this.flickrJSON.items = this.flickrJSON.items.concat(response.photos.photo)
         })
     },
 
     loadMore() {
       this.busy = true;
+      let pageLimit = this.currentPage * 100 // flickr sends 100 per page
 
       setTimeout(() => {
         if(this.lastImageIndex+10 < this.flickrJSON.items.length) {
@@ -127,7 +131,9 @@ export default Vue.component("tagsPage", {
           this.lastImageIndex += 10
         } else
         if(this.lastImageIndex === this.flickrJSON.items.length) {
-          // limit reached
+          // limit reached, next page please
+          this.currentPage++
+          this.getPhotosByTags(this.search)
         } else {
           for(let i=this.lastImageIndex; i<this.flickrJSON.items.length; i++) {
             this.displayJSON.items.push(this.flickrJSON.items[i])
