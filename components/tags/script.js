@@ -95,6 +95,10 @@ export default Vue.component("tagsPage", {
         })
     },
 
+    getPhotoURL(photoID, ownerID) {
+      return `https://www.flickr.com/${ownerID}/${photoID}`
+    },
+
     getPhotosByTags(tags) {
       let photos = []
 
@@ -112,10 +116,14 @@ export default Vue.component("tagsPage", {
 
       const request = `${this.flickrApiUrl}?${queries}&${format}`
 
-
       this.getFlickrJSON(request, "jsonFlickrApi")
         .then((response) => {
-          this.flickrJSON.items = this.flickrJSON.items.concat(response.photos.photo)
+          let photoArray = response.photos.photo
+          photoArray.map((photo) => {
+            photo.link = this.getPhotoURL(photo.id, photo.owner)
+          })
+          this.flickrJSON.items = this.flickrJSON.items.concat(photoArray)
+          console.log(JSON.stringify(this.flickrJSON.items[0]))
         })
     },
 
