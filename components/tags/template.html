@@ -7,7 +7,7 @@
     </section>
   </form>
   <ul class="row">
-    <li v-for="item in flickrJSON.items" class="col s12 m4 l3 xl2">
+    <li v-for="item in displayJSON.items" class="col s12 m4 l3 xl2">
       <section class="card sticky-action small">
         <section class="card-image waves-effect waves-block waves-light">
           <img class="activator" :src="item.url_m" :alt="item.title">
@@ -32,6 +32,21 @@
                 <a :href="`https://www.flickr.com/photos/tags/${tag}`" v-bind:title=tag>&#35;{{tag}}</a>
               </li>
             </ul>
+          </section>
+        </section>
+      </section>
+    </li>
+    <li class="col s12 m4 l3 xl2">
+      <section v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+        <section class="preloader-wrapper big active">
+          <section class="spinner-layer spinner-blue-only">
+            <section class="circle-clipper left">
+              <section class="circle"></section>
+            </section><section class="gap-patch">
+              <section class="circle"></section>
+            </section><section class="circle-clipper right">
+              <section class="circle"></section>
+            </section>
           </section>
         </section>
       </section>

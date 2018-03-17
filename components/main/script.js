@@ -5,7 +5,7 @@ export default Vue.component("mainPage", {
   data() {
     return {
       flickrFeedUrl: "https://api.flickr.com/services/feeds/photos_public.gne?format=json",
-      flickrJSON: {}
+      flickrJSON: { items: [] }
     }
   },
   beforeCreate: function () {
@@ -83,7 +83,7 @@ export default Vue.component("mainPage", {
     },
 
     getFlickrJSON() {
-      return fetchJSONP(this.flickrUrl, "jsonFlickrFeed")
+      return fetchJSONP(this.flickrFeedUrl, "jsonFlickrFeed")
         .then(function(response) {
           return response.json()
         })

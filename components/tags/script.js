@@ -5,8 +5,11 @@ export default Vue.component("tagsPage", {
   data() {
     return {
       flickrApiUrl: "http://api.flickr.com/services/rest/",
-      flickrJSON: {},
-      search: ""
+      flickrJSON: { items: [] },
+      search: "",
+      busy: false,
+      displayJSON: { items: [] },
+      lastImageIndex: 0
     }
   },
   beforeCreate: function () {
@@ -85,8 +88,8 @@ export default Vue.component("tagsPage", {
         .then(function(response) {
           return response.json()
         })
-        .catch(function(ex) {
-          console.log('parsing failed', ex)
+        .catch(function(err) {
+          console.error('parsing failed', ex)
         })
     },
 
@@ -109,7 +112,33 @@ export default Vue.component("tagsPage", {
       this.getFlickrJSON(request, "jsonFlickrApi")
         .then((response) => {
           this.flickrJSON = { items: response.photos.photo }
+          this.lastImageIndex = 0
         })
+    },
+
+    loadMore() {
+      this.busy = true;
+
+      setTimeout(() => {
+        if(this.lastImageIndex+10 < this.flickrJSON.items.length) {
+          for(let i=this.lastImageIndex; i<this.lastImageIndex+10; i++) {
+            this.displayJSON.items.push(this.flickrJSON.items[i])
+          }
+          this.lastImageIndex += 10
+        } else
+        if(this.lastImageIndex === this.flickrJSON.items.length) {
+          // limit reached
+        } else {
+          for(let i=this.lastImageIndex; i<this.flickrJSON.items.length; i++) {
+            this.displayJSON.items.push(this.flickrJSON.items[i])
+          }
+          this.lastImageIndex = this.flickrJSON.items.length
+        }
+
+        this.busy = false
+      }, 1000)
     }
   }
 })
+
+Vue.use(infiniteScroll)
