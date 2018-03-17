@@ -37,17 +37,20 @@
       </section>
     </li>
     <li class="col s12 m4 l3 xl2">
-      <section v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-        <section class="preloader-wrapper big active">
-          <section class="spinner-layer spinner-blue-only">
-            <section class="circle-clipper left">
-              <section class="circle"></section>
-            </section><section class="gap-patch">
-              <section class="circle"></section>
-            </section><section class="circle-clipper right">
-              <section class="circle"></section>
+      <section class="card small valign-wrapper">
+        <section class="card-image row">
+          <section class="preloader-wrapper big active">
+            <section class="spinner-layer spinner-blue-only">
+              <section class="circle-clipper left">
+                <section class="circle"></section>
+              </section><section class="gap-patch">
+                <section class="circle"></section>
+              </section><section class="circle-clipper right">
+                <section class="circle"></section>
+              </section>
             </section>
           </section>
+          <section v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
         </section>
       </section>
     </li>
