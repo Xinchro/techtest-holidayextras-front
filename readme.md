@@ -12,7 +12,6 @@ This is the front end portion of the tech test for HolidayExtras
 
 ## TODO
 - Add more rigorous mistake/error checking in functions
-- Add sorting
 - Add proper unit testing unit suite
 - Add searching by username
 
