@@ -4,7 +4,7 @@ export default Vue.component("tagsPage", {
   template: template,
   data() {
     return {
-      flickrApiUrl: "http://api.flickr.com/services/rest/",
+      flickrApiUrl: "https://api.flickr.com/services/rest/",
       flickrJSON: { items: [] },
       search: "",
       busy: false,
