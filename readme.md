@@ -10,6 +10,12 @@ This is the front end portion of the tech test for HolidayExtras
 ## Running
 - Run a local server over `http` using something like [http-server](https://www.npmjs.com/package/http-server) and visit your local url.
 
+## TODO
+- Add more rigorous mistake/error checking in functions
+- Add sorting
+- Add proper unit testing unit suite
+- Add searching by username
+
 ## Built With
 - [VueJS](https://vuejs.org/)
 - [Sass](http://sass-lang.com/)
