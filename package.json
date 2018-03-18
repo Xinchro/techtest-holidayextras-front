@@ -6,11 +6,17 @@
   "scripts": {
     "build": "webpack --mode=development || exit 1",
     "css": "sass style.scss style.css",
+    "babel": "babel bundle.js --out-file bundle.js",
+    "start": "npm run build && npm run babel",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Xinchro",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "raw-loader": "^0.5.1",
     "sass": "^1.0.0-rc.1",
     "webpack": "^4.1.1",

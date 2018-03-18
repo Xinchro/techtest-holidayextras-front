@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require("path")
 
 module.exports = {
   entry: "./script.js",
@@ -11,9 +11,21 @@ module.exports = {
       {
         test: /\.(html)$/,
         use: {
-          loader: 'raw-loader'
+          loader: "raw-loader"
+        }
+      },
+      {
+        test: /\.js$/,
+        use: {
+          loader: "babel-loader",
+          query: {
+            presets: [ "es2015" ]
+          }
         }
       }
     ]
+  },
+  stats: {
+    colors: true
   }
 }
