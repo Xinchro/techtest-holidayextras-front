@@ -1,9 +1,21 @@
 <section id="vue-main-page">
   <navbar></navbar>
-  <form v-on:submit.prevent="getPhotosByTags(search)">
-    <section class="input-field">
+  <form v-on:submit.prevent="getPhotosByTags(search)" class="row">
+    <section class="input-field col s12 m9">
       <input id="search" type="search" placeholder="Search" v-model="search">
       <i class="material-icons">close</i>
+    </section>
+    <section class="col s12 m3">
+      <label>Sort</label>
+      <select class="browser-default" v-model="sort">
+        <option value="11">Date Taken - Asc</option>
+        <option value="12">Date Taken - Desc</option>
+        <option value="21">Date Posted - Asc</option>
+        <option value="22" selected>Date Posted - Desc</option>
+        <option value="31">Interest - Asc</option>
+        <option value="32">Interest - Desc</option>
+        <option value="4">Relevance</option>
+      </select>
     </section>
   </form>
   <ul class="row">

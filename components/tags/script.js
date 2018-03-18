@@ -10,14 +10,20 @@ export default Vue.component("tagsPage", {
       busy: false,
       displayJSON: { items: [] },
       lastImageIndex: 0,
-      currentPage: 1
+      currentPage: 1,
+      sort: 22
     }
   },
-  beforeCreate: function () {
-    this.$nextTick(function () {
+  beforeCreate: function() {
+    this.$nextTick(function() {
       // an initial search
       this.start()
     })
+  },
+  watch: {
+    sort: function(value) {
+      this.refreshPhotosWithSort(value)
+    }
   },
   methods: {
     /*
@@ -27,6 +33,61 @@ export default Vue.component("tagsPage", {
       // initial (default) search
       this.search = "cat"
       this.getPhotosByTags(this.search)
+    },
+
+    /*
+      Checks which sorting method we want to use and refreshes our photo array
+
+      @params string - string of a number
+    */
+    refreshPhotosWithSort(value) {
+      // try to parse value, print an error if it fails
+      try {
+        value = parseInt(value)
+      } catch(err) {
+        console.error(err)
+        console.error("Failed to parse sorting int")
+      }
+      // switch to decide what sort we're using, logs error if value doesn't match
+      switch(value) {
+        case 11:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "date-posted-asc")
+          break
+        case 12:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "date-posted-desc")
+          break
+        case 21:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "date-taken-asc")
+          break
+        case 22:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "date-taken-desc")
+          break
+        case 31:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "interestingness-asc")
+          break
+        case 32:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "interestingness-desc")
+          break
+        case 4:
+          this.flickrJSON.items = []
+          this.displayJSON = { items: [] }
+          this.getPhotosByTags(this.search, "relevance")
+          break
+        default:
+          console.error("Invalid sort value")
+      }
     },
 
     /*
@@ -145,10 +206,12 @@ export default Vue.component("tagsPage", {
       Get a page(up to 100) of photos from flickr, based on the tags, and add it to the photo collection
 
       @params string - space separated tags
+      @params sortType (optional) - flickr api sort string
     */
-    getPhotosByTags(tags) {
+    getPhotosByTags(tags, sortType) {
       // set the system to busy until we get the new photos
       this.busy = true
+
       let photos = []
 
       // turn our tags into an array
@@ -158,10 +221,11 @@ export default Vue.component("tagsPage", {
       const method = "flickr.photos.search"
       const extras = "date_taken,description,owner_name,tags,url_m"
       const format = "format=json"
-      const page = `page=${this.currentPage}`
+      const page = this.currentPage
+      const sort = sortType || ""
 
       // join all our queries together
-      const queries = `method=${method}&api_key=${window.flickrTokens.Key}&tags=${tags}&extras=${extras}&${page}`
+      const queries = `method=${method}&api_key=${window.flickrTokens.Key}&tags=${tags}&extras=${extras}&page=${page}&sort=${sort}`
 
       // setup the request url
       const request = `${this.flickrApiUrl}?${queries}&${format}`
