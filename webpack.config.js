@@ -9,9 +9,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(html)$/,
+        test: /\.vue$/,
         use: {
-          loader: "raw-loader"
+          loader: "vue-loader",
+          options: {
+            loaders: {
+              js: "babel-loader"
+            }
+          }
         }
       },
       {
@@ -24,6 +29,12 @@ module.exports = {
         }
       }
     ]
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
   },
   stats: {
     colors: true

@@ -1,5 +1,5 @@
-import mainPage from "./components/main/script.js"
-import tagsPage from "./components/tags/script.js"
+import mainPage from "./components/main.vue"
+import tagsPage from "./components/tags.vue"
 
 export default [
   {

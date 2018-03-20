@@ -7,7 +7,7 @@
     "build": "webpack --mode=development || exit 1",
     "css": "sass style.scss style.css",
     "babel": "babel bundle.js --out-file bundle.js",
-    "start": "npm run build && npm run babel",
+    "start": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Xinchro",
@@ -17,9 +17,26 @@
     "@babel/preset-env": "^7.0.0-beta.42",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
+    "css-loader": "^0.23.0",
     "raw-loader": "^0.5.1",
     "sass": "^1.0.0-rc.1",
+    "style-loader": "^0.13.2",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^14.2.1",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
+  },
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-router": "^3.0.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "./coverage/*",
+      "./bundle.js"
+    ],
+    "delay": "2500"
   }
 }
